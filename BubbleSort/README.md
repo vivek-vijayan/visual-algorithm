@@ -8,4 +8,4 @@ Developed for quick understanding of how bubble sort works.. have fun ⭐️
 
 
 ### Sample
-!(images)[module.png]
+![images](https://github.com/vivek-vijayan/visual-algorithm/blob/main/BubbleSort/module.png)
