@@ -4,7 +4,7 @@
 
 Developed for quick understanding of how bubble sort works.. have fun ⭐️
 
-<a href="https://htmlpreview.github.io/?https://github.com/vivek-vijayan/visual-algorithm/main/BubbleSort/algo.html"> Check this out </a>
+<a href="https://htmlpreview.github.io/?https://github.com/vivek-vijayan/visual-algorithm/main/BubbleSort/Bubblesort.html"> Check this out </a>
 
 
 ### Sample
