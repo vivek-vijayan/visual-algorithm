@@ -29,9 +29,9 @@
   </head>
 
   <style>
-      body{
-          background-color: #ffffff;
-      }
+    body {
+      background-color: #ffffff;
+    }
     .title {
       color: #051436;
       margin-bottom: 20px;
@@ -90,12 +90,12 @@
     .box {
       border-radius: 5px;
       background-color: #999999;
-      width:5px;
+      width: 5px;
       /*height: 50px;*/
       color: rgb(0, 0, 0);
       align-items: center;
       text-align: center;
-      text-overflow:ellipsis;
+      text-overflow: ellipsis;
       display: table;
       margin: 2px;
       float: left;
@@ -134,35 +134,34 @@
         <div class="display-5 title">
           <b>📈 Bubble Sorting Algorithm </b>
         </div>
-        <small style="color: #fca311"
-          >Algorithm to sort the numbers</small
-        >
+        <small style="color: #fca311">Algorithm to sort the numbers</small>
       </div>
 
-      <div class="row question-part">
-        <div>
-          <p class="h6">
-            How many random numbers you want?
-            <input
-              type="number"
-              placeholder="Total numbers?"
-              value="20"
-              id="totalnum"
-              class="input-area"
-              max="30"
-            />
-            <button
-              class="generate"
-              onclick="generateListOfRandomNumbers(true)"
-            >
-              Generate numbers
-            </button>
-            <button class="solve" onclick="sorting()">Solve</button>
-          </p>
-          
-        </div>
-        <div>
-          <p class="h6"></p>
+      <div class="row">
+        <div class="col-sm-12 question-part">
+          <div>
+            <p class="h6">
+              How many random numbers you want?
+              <input
+                type="number"
+                placeholder="Total numbers?"
+                value="40"
+                id="totalnum"
+                class="input-area"
+                max="30" style="margin: 5px;"
+              />
+              <button
+                class="generate" style="margin: 5px;"
+                onclick="generateListOfRandomNumbers(true)"
+              >
+                Generate numbers
+              </button>
+              <button class="solve" style="margin: 5px;" onclick="sorting()">Solve</button>
+            </p>
+          </div>
+          <div>
+            <p class="h6"></p>
+          </div>
         </div>
       </div>
 
@@ -222,7 +221,7 @@
         var newBox = document.createElement("div");
         newBox.className = "box";
         newBox.id = "b" + i;
-        newBox.style.height = (randomNumber * 3) + "px";
+        newBox.style.height = randomNumber * 3 + "px";
         var innerSpan = document.createElement("span");
         innerSpan.id = "r" + i;
         innerSpan.innerText = randomNumber;
@@ -281,7 +280,6 @@
         document.getElementById("b" + i).classList.add("completed");
         await sleep(1);
       }
-
     }
     //run(20);
   </script>
