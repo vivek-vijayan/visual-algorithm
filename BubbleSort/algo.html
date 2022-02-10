@@ -33,7 +33,7 @@
       background-color: #ffffff;
     }
     .title {
-      color: #051436;
+      color: #222831;
       margin-bottom: 20px;
       margin-top: 20px;
     }
@@ -44,52 +44,46 @@
 
     .input-area {
       padding: 10px;
-      border: solid #fca311;
+      border: solid #585858;
       border-radius: 10px;
       font-size: 20px;
     }
 
     .question-part {
-      background-color: #f0f0f0;
+      background-color: #ebebeb;
       border-radius: 10px;
-
+      color: rgb(46, 46, 46);
       padding: 20px;
     }
 
-    .generate {
-      background-color: #fca311;
+    .console-show {
+      background-color: #ffc13b;
       border: none;
       border-radius: 10px;
       padding: 13px;
-      color: white;
-      width: auto;
-      font-size: 20px;
-    }
-    .solve {
-      background-color: #00b42d;
-      border: none;
-      border-radius: 10px;
-      padding: 13px;
-      color: white;
+      color: rgb(255, 255, 255);
       width: auto;
       font-size: 20px;
     }
 
-    .console {
-      background-color: #14213d;
-      color: white;
+    .console-outer {
+      background-color: #00181a;
+      color: #4fbdba;
       font-size: 13px;
       text-align: left;
-      padding: 10px;
+      padding: 20px;
       height: 200px;
       width: 100%;
-      border-radius: 5px;
+      border-radius: 10px;
+    }
+
+    .console-overflow {
       overflow: auto;
     }
 
     .box {
-      border-radius: 5px;
-      background-color: #999999;
+      border-radius: 0px;
+      background-color: #ff6e40;
       width: 5px;
       /*height: 50px;*/
       color: rgb(0, 0, 0);
@@ -97,9 +91,14 @@
       text-align: center;
       text-overflow: ellipsis;
       display: table;
-      margin: 2px;
-      float: left;
+      margin: 1px;
       font-size: 0px;
+    }
+
+    .inner-main {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
     }
 
     .selected {
@@ -113,7 +112,7 @@
     }
 
     .completed {
-      background-color: #15ff00;
+      background-color: #0c9200;
       color: #030303;
     }
 
@@ -129,34 +128,80 @@
   </style>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="padding-left: 20px;">Vivek's Algorithm Repository</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDarkDropdown"
+          aria-controls="navbarNavDarkDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
     <div class="container">
       <div class="row">
         <div class="display-5 title">
-          <b>📈 Bubble Sorting Algorithm </b>
+          <b> 🧼 Bubble sort </b>
         </div>
-        <small style="color: #fca311">Algorithm to sort the numbers</small>
+        <div style="margin-bottom: 10px">
+          <p>
+            <small>
+              Bubble sort, sometimes referred to as sinking sort, is a simple
+              sorting algorithm that repeatedly steps through the list, compares
+              adjacent elements and swaps them if they are in the wrong order.
+              The pass through the list is repeated until the list is sorted.
+              <p style="font-size: 18px;">
+              <span class="badge rounded-pill bg-danger">Worst complexity: n^2</span>
+              <span class="badge rounded-pill bg-warning">Average complexity: n^2</span>
+              <span class="badge rounded-pill bg-success">Best complexity: n</span>
+              <span class="badge rounded-pill bg-info">Space complexity: 1</span>
+            </p>
+            </small>
+          </p>
+        </div>
       </div>
 
       <div class="row">
         <div class="col-sm-12 question-part">
           <div>
             <p class="h6">
-              How many random numbers you want?
+              Bucket size
               <input
                 type="number"
                 placeholder="Total numbers?"
                 value="40"
                 id="totalnum"
                 class="input-area"
-                max="30" style="margin: 5px;"
+                max="30"
+                style="margin: 5px"
               />
               <button
-                class="generate" style="margin: 5px;"
+                class="btn btn-warning"
+                style="margin: 5px"
                 onclick="generateListOfRandomNumbers(true)"
               >
-                Generate numbers
+                ⏎ Shuffle
               </button>
-              <button class="solve" style="margin: 5px;" onclick="sorting()">Solve</button>
+              <button
+                class="btn btn-success"
+                style="margin: 5px"
+                onclick="bubbleSorting()"
+              >
+                ▶️ Run
+              </button>
+              <button
+                class="btn btn-secondary"
+                style="margin: 5px"
+                onclick="console_show()"
+              >
+                ⌽ Console
+              </button>
             </p>
           </div>
           <div>
@@ -166,26 +211,51 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-12">
-          <div id="display-viewport"></div>
+        <div class="col-sm-10" style="margin: auto">
+          <div id="display-viewport" class="inner-main"></div>
         </div>
       </div>
 
-      <div class="container" style="margin-top: 30px">
+      <div
+        class="container"
+        id="console-div"
+        style="margin-top: 30px; display: block"
+      >
         <div class="row">
-          <p>Console:</p>
-          <div class="console">
-            <p id="console">
-              <span style="color: #fca311"></span>
-            </p>
+          <p class="h6">Step Terminal:</p>
+          <div class="console-outer console-overflow">
+            <div class="">
+              <p id="console">
+                <span style="color: #fca311"></span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <footer style="margin-top: 30px;">
+      <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+              <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+            </a>
+            <span class="text-muted">&copy; 2022. Created by <a href="https://github.com/vivek-vijayan">vivek-vijayan</a> with ❤️</span>
+          </div>
+      
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+          </ul>
+        </footer>
+      </div>
+    </footer>
   </body>
 
   <script>
     updateConsole("Welcome to my project 👋🏻");
+    updateConsole("Screen width : " + screen.width);
     // sleep function
     function sleep(millisec) {
       return new Promise((response) => setTimeout(response, millisec));
@@ -206,6 +276,12 @@
         value;
     }
 
+    function console_show() {
+      document.getElementById("console-div").style.display === "block"
+        ? (document.getElementById("console-div").style.display = "none")
+        : (document.getElementById("console-div").style.display = "block");
+    }
+
     function generateListOfRandomNumbers(removechild) {
       if (removechild) {
         //clearing all the present element
@@ -213,7 +289,6 @@
         deleteElement();
       }
       // display list of box
-
       var add_box = document.createDocumentFragment();
       var totalnum = document.getElementById("totalnum").value;
       for (var i = 1; i <= totalnum; i++) {
@@ -222,6 +297,10 @@
         newBox.className = "box";
         newBox.id = "b" + i;
         newBox.style.height = randomNumber * 3 + "px";
+        newBox.style.width =
+          screen.width < 500
+            ? (screen.width - totalnum) / totalnum - 2 + "px"
+            : (screen.width - 364 - totalnum) / totalnum - 2 + "px";
         var innerSpan = document.createElement("span");
         innerSpan.id = "r" + i;
         innerSpan.innerText = randomNumber;
@@ -232,9 +311,16 @@
       document.getElementById("display-viewport").appendChild(add_box);
     }
 
-    generateListOfRandomNumbers(false);
+    // Shuffling
+    async function shuffle() {
+      for (var x = 0; x < 5; x++) {
+        generateListOfRandomNumbers(true);
+        await sleep(100);
+        updateConsole("Shuffling....");
+      }
+    }
 
-    async function sorting() {
+    async function bubbleSorting() {
       updateConsole("Sorting started");
       var speed = 0;
       var totalnum = parseInt(document.getElementById("totalnum").value);
@@ -281,6 +367,6 @@
         await sleep(1);
       }
     }
-    //run(20);
+    shuffle();
   </script>
 </html>
