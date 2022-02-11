@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Merge Sort</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+      integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <style>
+    body {
+      background-color: #ffffff;
+    }
+    .title {
+      color: #222831;
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+
+    .vertical-center {
+      margin-top: 20px;
+    }
+
+    .input-area {
+      padding: 10px;
+      border: solid #585858;
+      border-radius: 10px;
+      font-size: 20px;
+    }
+
+    .question-part {
+      background-color: #ebebeb;
+      border-radius: 10px;
+      color: rgb(46, 46, 46);
+      padding: 20px;
+    }
+
+    .console-show {
+      background-color: #ffc13b;
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      color: rgb(255, 255, 255);
+      width: auto;
+      font-size: 20px;
+    }
+
+    .console-outer {
+      background-color: #00181a;
+      color: #4fbdba;
+      font-size: 13px;
+      text-align: left;
+      padding: 20px;
+      height: 200px;
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .console-overflow {
+      overflow: auto;
+    }
+
+    .box {
+      border-radius: 0px;
+      background-color: #ff6e40;
+      width: 5px;
+      /*height: 50px;*/
+      color: rgb(0, 0, 0);
+      align-items: center;
+      text-align: center;
+      text-overflow: ellipsis;
+      display: table;
+      margin: 1px;
+      font-size: 0px;
+    }
+
+    .inner-main {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+    }
+
+    .selected {
+      background-color: #d62828;
+      color: #efefef;
+    }
+
+    .changing {
+      background-color: #fbff00;
+      color: #030303;
+    }
+
+    .completed {
+      background-color: #0c9200;
+      color: #030303;
+    }
+
+    .reverse-selected {
+      background-color: rgb(0, 163, 49);
+      color: #efefef;
+    }
+
+    .box span {
+      vertical-align: middle;
+      display: table-cell;
+    }
+  </style>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="padding-left: 20px"
+          >Vivek's Algorithm Repository</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDarkDropdown"
+          aria-controls="navbarNavDarkDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="display-5 title">
+          <b> 🖇 Merge sort </b>
+        </div>
+        <div style="margin-bottom: 10px">
+          <p>
+            <small>
+              Merge Sort is a Divide and Conquer algorithm. It divides the input
+              array into two halves, calls itself for the two halves, and then
+              merges the two sorted halves. The merge() function is used for
+              merging two halves. The merge(arr, l, m, r) is a key process that
+              assumes that arr[l..m] and arr[m+1..r] are sorted and merges the
+              two sorted sub-arrays into one
+              <p style="font-size: 18px">
+                <span class="badge rounded-pill bg-danger"
+                  >Worst complexity: O(n*log n)</span
+                >
+                <span class="badge rounded-pill bg-warning"
+                  >Average complexity: O(n*log n)</span
+                >
+                <span class="badge rounded-pill bg-success"
+                  >Best complexity: O(n*log n)</span
+                >
+                <span class="badge rounded-pill bg-info"
+                  >Space complexity: O(n)</span
+                >
+              </p>
+            </small>
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 question-part">
+          <div>
+            <p class="h6">
+              Bucket size
+              <input
+                type="number"
+                placeholder="Total numbers?"
+                value="40"
+                id="totalnum"
+                class="input-area"
+                max="30"
+                style="margin: 5px"
+              />
+              <button
+                class="btn btn-warning"
+                style="margin: 5px"
+                onclick="shuffle()"
+              >
+                ⏎ Shuffle
+              </button>
+              <button
+                class="btn btn-success"
+                style="margin: 5px"
+                onclick="callMergeSort()"
+              >
+                ▶️ Run
+              </button>
+              <button
+                class="btn btn-secondary"
+                style="margin: 5px"
+                onclick="console_show()"
+              >
+                ⌽ Console
+              </button>
+            </p>
+          </div>
+          <div>
+            <p class="h6"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-10" style="margin: auto">
+          <div id="display-viewport" class="inner-main"></div>
+        </div>
+      </div>
+
+      <div
+        class="container"
+        id="console-div"
+        style="margin-top: 30px; display: block"
+      >
+        <div class="row">
+          <p class="h6">Step Terminal:</p>
+          <div class="console-outer console-overflow">
+            <div class="">
+              <p id="console">
+                <span style="color: #fca311"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer style="margin-top: 30px">
+      <div class="container">
+        <footer
+          class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
+        >
+          <div class="col-md-4 d-flex align-items-center">
+            <a
+              href="/"
+              class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"
+            >
+              <svg class="bi" width="30" height="24">
+                <use xlink:href="#bootstrap" />
+              </svg>
+            </a>
+            <span class="text-muted"
+              >&copy; 2022. Created by
+              <a href="https://github.com/vivek-vijayan">vivek-vijayan</a> with
+              ❤️
+            </span>
+          </div>
+        </footer>
+      </div>
+    </footer>
+  </body>
+
+  <script>
+    updateConsole("Welcome to my project 👋🏻");
+    updateConsole("Screen width : " + screen.width);
+
+    // dictionary
+    var numberList = {};
+
+    // sleep function
+    function sleep(millisec) {
+      return new Promise((response) => setTimeout(response, millisec));
+    }
+
+    // Deleting the existing members in the parent class(display-viewport)
+    function deleteElement() {
+      var parent = document.getElementById("display-viewport");
+      parent.innerHTML = "";
+      for (var x = 1; x <= totalnum; x++) {
+        delete numberList.x;
+      }
+    }
+
+    // Console update
+    function updateConsole(newString) {
+      value = document.getElementById("console").innerHTML;
+      document.getElementById("console").innerHTML =
+        "<br><span style='color: #fca311'>vivek-vijayan > </span>" +
+        newString +
+        value;
+    }
+
+    function console_show() {
+      document.getElementById("console-div").style.display === "block"
+        ? (document.getElementById("console-div").style.display = "none")
+        : (document.getElementById("console-div").style.display = "block");
+    }
+
+    function generateListOfRandomNumbers(removechild) {
+      if (removechild) {
+        //clearing all the present element
+        updateConsole("Old list deleted successfully");
+        deleteElement();
+      }
+      // display list of box
+      var add_box = document.createDocumentFragment();
+      var totalnum = document.getElementById("totalnum").value;
+      for (var i = 1; i <= totalnum; i++) {
+        var randomNumber = Math.floor(Math.random() * totalnum * 2);
+        var newBox = document.createElement("div");
+        newBox.className = "box";
+        newBox.id = "b" + i;
+        newBox.style.height = randomNumber * 2 + "px";
+        newBox.style.width =
+          screen.width < 500
+            ? (screen.width - totalnum) / totalnum - 2 + "px"
+            : (screen.width - 364 - totalnum) / totalnum - 2 + "px";
+        var innerSpan = document.createElement("span");
+        innerSpan.id = "r" + i;
+        innerSpan.innerText = randomNumber;
+        newBox.append(innerSpan);
+        add_box.append(newBox);
+        numberList[innerSpan.id] = randomNumber;
+      }
+      updateConsole("Generated " + totalnum + " elements");
+      document.getElementById("display-viewport").appendChild(add_box);
+    }
+
+    // Shuffling
+    async function shuffle() {
+      for (var x = 0; x < 5; x++) {
+        generateListOfRandomNumbers(true);
+        await sleep(100);
+        updateConsole("Shuffling....");
+      }
+    }
+
+    async function bubbleSorting() {
+      updateConsole("Sorting started");
+      var speed = 0;
+      var totalnum = parseInt(document.getElementById("totalnum").value);
+      updateConsole("Got value of total num" + totalnum);
+      for (var i = 1; i < totalnum + 1; i++) {
+        document.getElementById("b" + i).classList.add("selected");
+        for (var j = 1; j < totalnum - i + 1; j++) {
+          document.getElementById("b" + j).classList.add("reverse-selected");
+          updateConsole(
+            "Checking " +
+              document.getElementById("r" + j).innerHTML +
+              "  >  " +
+              document.getElementById("r" + (j + 1)).innerHTML
+          );
+          if (
+            parseInt(document.getElementById("r" + j).innerHTML) >
+            parseInt(document.getElementById("r" + (j + 1)).innerHTML)
+          ) {
+            var temp;
+            temp = document.getElementById("r" + j).innerHTML;
+            document.getElementById("r" + j).innerHTML =
+              document.getElementById("r" + (j + 1)).innerHTML;
+            document.getElementById("r" + (j + 1)).innerHTML = temp;
+
+            temp = document.getElementById("b" + j).style.height;
+            document.getElementById("b" + j).style.height =
+              document.getElementById("b" + (j + 1)).style.height;
+            document.getElementById("b" + (j + 1)).style.height = temp;
+
+            document.getElementById("b" + j).classList.add("changing");
+            document.getElementById("b" + (j + 1)).classList.add("changing");
+            await sleep(parseInt(1));
+            document.getElementById("b" + j).classList.remove("changing");
+            document.getElementById("b" + (j + 1)).classList.remove("changing");
+          }
+          await sleep(parseInt(1));
+          document.getElementById("b" + j).classList.remove("reverse-selected");
+        }
+        document.getElementById("b" + i).classList.remove("selected");
+      }
+      updateConsole("Sorting completed successfully");
+      for (var i = 1; i < totalnum + 1; i++) {
+        document.getElementById("b" + i).classList.add("completed");
+        await sleep(1);
+      }
+    }
+    shuffle();
+
+    async function merge(arr, l, m, r) {
+      var n1 = m - l + 1;
+      var n2 = r - m;
+
+      // Create temp arrays
+      var L = new Array(n1);
+      var R = new Array(n2);
+
+      // Copy data to temp arrays L[] and R[]
+      for (var i = 0; i < n1; i++) L[i] = arr["r" + (l + i)];
+      for (var j = 0; j < n2; j++) R[j] = arr["r" + (m + 1 + j)];
+
+      // Merge the temp arrays back into arr[l..r]
+
+      // Initial index of first subarray
+      var i = 0;
+
+      // Initial index of second subarray
+      var j = 0;
+
+      // Initial index of merged subarray
+      var k = l;
+
+      while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+          arr["r" + k] = L[i];
+          document.getElementById("b" + k).style.height = L[i] * 2 + "px";
+          //updateConsole("Adding to left heirarchy");
+          i++;
+        } else {
+          arr["r" + k] = R[j];
+          document.getElementById("b" + k).style.height = R[j] * 2 + "px";
+          //updateConsole("Adding to right heirarchy");
+          j++;
+        }
+        k++;
+      }
+
+      // Copy the remaining elements of
+      // L[], if there are any
+      while (i < n1) {
+        arr["r" + k] = L[i];
+        document.getElementById("b" + k).style.height = L[i] * 2 + "px";
+        i++;
+        k++;
+      }
+
+      // Copy the remaining elements of
+      // R[], if there are any
+      while (j < n2) {
+        arr["r" + k] = R[j];
+        document.getElementById("b" + k).style.height = R[j] * 2 + "px";
+        j++;
+        k++;
+      }
+    }
+
+    // l is for left index and r is
+    // right index of the sub-array
+    // of arr to be sorted */
+    async function mergeSort(arr, l, r) {
+      if (l >= r) {
+        return; //returns recursively
+      }
+      var m = l + parseInt((r - l) / 2);
+
+      mergeSort(arr, l, m);
+      await sleep(200);
+      mergeSort(arr, m + 1, r);
+      await sleep(200);
+      merge(arr, l, m, r);
+      await sleep(200);
+      updateConsole("Sorting performing");
+    }
+
+    async function callMergeSort() {
+      var totalnum = parseInt(document.getElementById("totalnum").value);
+      for (var i = 1; i <= totalnum / 9 + 1; i++) {
+        await mergeSort(numberList, 1, parseInt(totalnum));
+      }
+    }
+  </script>
+</html>
